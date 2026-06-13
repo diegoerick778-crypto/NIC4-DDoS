@@ -8,7 +8,7 @@ Descrição curta do projeto.
 ## 📦 Instalação
 
 ```bash
-git clone https://github.com/seuusuario/NIC4-S.git
+git clone https://github.com/diegoerick778-crypto/NIC4-S.git
 cd NIC4-DDoS
 pip install -r requirements.txt
 ```
