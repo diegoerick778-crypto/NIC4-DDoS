@@ -34,7 +34,17 @@ while True:
 
 print("URL:", url)
 # Numero de conexoes simultaneas agressivas
-CONEXOES = 500
+while True:
+    try:
+        # Lê o input e converte imediatamente para número inteiro
+        CONEXOES = int(input("quantidade de conexoesxd: "))
+        if CONEXOES > 0:
+            break
+        print("Por favor, digite um número maior que zero.")
+    except ValueError:
+        # Executado caso o usuário digite letras ou símbolos
+        print("Entrada inválida! Digite apenas números inteiros.")
+
 
 async def enviar_requisicao(session):
     while True:
