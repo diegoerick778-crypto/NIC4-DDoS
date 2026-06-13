@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
+
+from pyfiglet import figlet_format
 import asyncio
 import aiohttp
 import sys
 
 # Alvo local
+
+print(figlet_format("NIC4-DDoS"))
+
 while True:
     url = input("site que vai ser fodidoXD: ")
 
