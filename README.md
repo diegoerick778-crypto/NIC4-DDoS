@@ -9,7 +9,7 @@ Descrição curta do projeto.
 
 ```bash
 git clone https://github.com/seuusuario/NIC4-S.git
-cd NIC4-S
+cd NIC4-DDoS
 pip install -r requirements.txt
 ```
 
