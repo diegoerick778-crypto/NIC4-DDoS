@@ -34,7 +34,7 @@ try:
 
     while True:
         try:
-            CONEXOES = int(input("quantidade de conexoesxd: "))
+            CONEXOES = int(input("quantidade de threads xd: "))
             if CONEXOES > 0:
                 break
             print("Por favor, digite um número maior que zero.")
@@ -62,7 +62,7 @@ async def enviar_requisicao(session, url_alvo):
         pass # Ignora erros de conexão de forma segura sem capturar sinais do sistema
 
 async def iniciar():
-    print(f"\n[*] Iniciando simulação com {CONEXOES} conexões assíncronas...")
+    print(f"\n[*] Iniciando com {CONEXOES} threads...")
     print("[*] Pressione Ctrl + C para parar a qualquer momento.\n")
 
     # Configuração otimizada para alto desempenho de rede no Windows/Linux
@@ -83,6 +83,6 @@ async def iniciar():
 try:
     asyncio.run(iniciar())
 except KeyboardInterrupt:
-    print("\n[*] Teste encerrado com sucesso pelo usuário.")
+    print("\n[*] DDoS com sucesso pelo usuário.")
     sys.exit(0)
 
