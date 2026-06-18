@@ -1,4 +1,4 @@
-# NIC4-DDoS
+# doxbin-ddos
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -8,15 +8,15 @@ Descrição curta do projeto.
 ## 📦 Instalação
 
 ```bash
-git clone https://github.com/diegoerick778-crypto/NIC4-S.git
-cd NIC4-DDoS
+git clone https://github.com/diegoerick778-crypto/doxbin-ddos.git
+cd doxbin-ddos
 pip install -r requirements.txt
 ```
 
 ## 🚀 Uso
 
 ```bash
-python NIC4-DDoS.py
+python doxbin-ddos.py
 ```
 
 ## 📋 Requisitos
